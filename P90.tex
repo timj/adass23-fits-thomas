@@ -153,12 +153,56 @@ a more detailed examination in a subsequent paper.
 
 \subsection{Lack of versioning, semantics and encodings}
 
+There is no standard way to specify the version of a given FITS file
+or what extensions it supports. You must read the file and determine
+dynamically which extensions are present and whether they are
+understood. The ``once FITS, forever FITS'' maxim gives you some
+confidence that you can always read a FITS file but you can't be sure
+if there is something that you don't understand. Explicit versioning
+of FITS files will help but there also needs to be some way to declare
+that a particular data model is being used from variants such as
+OIFITS \citep{2006SPIE.6268E.106T}, MBFITS
+\citep{2006A&A...454L..25M}, and FITS-IDI \citep{2011AIPS114}, and to
+validate the contents against a schema.
+
+The allowed character set in FITS of 7-bit US-ASCII is overly
+restrictive in a Unicode world. In the late 1970s this was the correct
+choice but in the 21st Century it seems strange that we cannot use and
+accent in someone's name or use a degree symbol in a comment.
+
 \subsection{Missing critical data models}
+
+FITS can support tables and multi-dimensional images but there is not
+standardised way of grouping these constructs in a related
+manner. Determining that a particular image extension contains the
+variance or mask for another image relies on string parsing and shared
+convention. Allowing related extensions to be grouped with a
+dictionary of shared meaning would go a long way to help with this
+issue.
+
+The current FITS WCS data models are complex yet incomplete and
+inflexible. There needs to be a way to stack mappings in an arbitrary
+manner to allow for flexible model development \citep[see
+e.g.][]{O35_adassxxii,2012ASPC..461..825B}.
+
 
 \subsection{Inflexibility in organizing and representing metadata and
   data}
 
-\subsection{Inadequate support for large, dsitributed data}
+The 80 character fixed format header is extremely restrictive and
+encourages awkward extensions (e.g. ESO HIERARCH) that can not
+overcome the underlying constraints. Additionally, the lack of
+namespaces and uncertainty over inheritance of headers to other images
+leads to confusion.
+
+\subsection{Inadequate support for large, distributed data}
+
+Modern data sets can result in files of several terabytes that must be
+distributed across multiple file systems. The FITS grouping convention
+tries to provide this facility and should be made more robust and
+transparent. Additionally, streaming indeterminately sized data sets
+to files must be supported.
+
 
 \section{Summary -- Significant Problems exist in the FITS standard}
 
