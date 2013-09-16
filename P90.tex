@@ -10,6 +10,8 @@
 
 \markboth{Thomas et al.}{FITS and the needs of modern astronomical research}
 
+\newcommand{\aspconf}{ASP Conf.\ Ser.}
+
 \begin{document}
 
 \title{Why FITS is failing to meet the needs of modern astronomical
@@ -72,6 +74,75 @@ Princeton, NY 08544, USA}
 
 \section{Introduction}
 
+The Flexible Image Transport System standard
+\citep[FITS;][]{1981A&AS...44..363W,2001A&A...376..359H,2010A&A...524A..42P}
+has been a fundamental part of astronomical computing for a
+significant part of the past 4 decades. FITS has provided the central
+means to store and exchange astronomical data and, because of hard
+work of the FITS community, it has become a relatively easy exercise
+for application writers, archivists and end user scientists to
+interchange data and work productively on many computational astronomy
+problems. The success of FITS is such that it has even spread to other
+domains such as medical imaging and digitizing manuscripts in the
+Vatican library
+\citep[ascl:1206.013,][]{2006JRASC.100..242W,2012EWASSAlle}
+
+%% EWASS 2012 had multiple papers on FITS in a special session on
+%% digiral preservation. Chiappetti (from IAU) and Ammenti (from
+%% the Vatican). No write ups available though.
+
+Although there have been significant changes, the FITS standard has
+evolved very slowly since its genesis in the late 1970s. FITS has
+added new types of metadata conventions such as World Coordinate
+System
+\citep[WCS;][]{2002A&A...395.1061G,2002A&A...395.1077C,2006A&A...446..747G}
+representation, and data serializations such as variable length binary
+tables \citep{1995A&AS..113..159C}. Nevertheless, these changes have
+not been sufficient to match the greater evolution in astronomical
+research over the same period of time.
+
+Astronomical research now goes beyond the paradigm of the original
+scientific team consuming only the observational data for which they
+proposed. The astronomy community has shifted towards utilizing
+observations of others, accessing data from remote archives over the
+Internet, and combining these data with the original observations (or
+theoretical calculations) in order to obtain better and wider ranging
+scientific results. Many research projects now involve many diverse
+data sets from a range of sources. Instruments in astronomy now
+produce many orders of magnitude larger datasets than were common at
+the time FITS was born, in some cases
+\citep[e.g.][]{2012ASPC..461..283A} requiring parallelized,
+distributed storage systems to provide adequate data rates.
+
+Astronomers have come to increasingly rely on others to write software
+to help process and analyze their data. Common libraries, analysis
+environments, pipeline processed data, applications and services
+provided by third parties form a crucial foundation for many
+astronomers toolboxes. All of this requires that the interchange of
+data between different tools needs to be as seamless and automated as
+possible, and that complex data models and metadata used in processing
+are maintained and understood through the interchange.
+
+These changes in research practices pose new challenges for 21st
+century. We must address the need to handle an expanded range of
+specialized data product types and models, be more conducive to the
+distributed exchange and storage of data, handle very large datasets
+and provide a means to capture significantly more complex metadata and
+data relationships.
+
+These limitations have caused members of the community to seek more
+capable storage formats, both in the past \citep[e.g.\ Starlink
+HDS;][]{1982QJRAS..23..485D} and in the present and future
+\citep[e.g.\ LOFAR][]{2011ASPC..442...53A} or in developing new
+formats of their own {refs}. Use of FITS will inevitably fall should
+it not adapt to these new challenges.
+
+It is our intended goal in this paper to highlight some selected,
+important, problems which exist in the FITS core standard today. It is
+not our intention in this paper to prescribe specific remedies to
+these issues; rather, we hope to call attention of the FITS and
+greater astronomical computing community to these issues in the hopes
+that it will spur action to resolve them.
 
 
 
