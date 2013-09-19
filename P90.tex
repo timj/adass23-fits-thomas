@@ -154,17 +154,17 @@ a more detailed examination in a subsequent paper.
 
 \subsection{Lack of versioning, semantics and encodings}
 
-There is no standard way to specify the version of a given FITS file
-or what extensions it supports. You must read the file and determine
+There is no standard way to specify the version of a given FITS file or
+what extensions it supports. You must read the file and determine
 dynamically which extensions are present and whether they are
 understood. The ``once FITS, forever FITS'' maxim gives you some
-confidence that you can always read a FITS file but you can't be sure
-if there is something that you don't understand. Explicit versioning
+confidence that you can always read a FITS file but you cannot be sure
+if there is something that you do not understand.  Explicit versioning
 of FITS files will help but there also needs to be some way to declare
-that a particular data model is being used from variants such as
-OIFITS \citep{2006SPIE.6268E.106T}, MBFITS
-\citep{2006A&A...454L..25M}, and FITS-IDI \citep{2011AIPS114}, and to
-validate the contents against a schema.
+that a particular data model is being used from variants such as OIFITS
+\citep{2006SPIE.6268E.106T}, MBFITS \citep{2006A&A...454L..25M}, and
+FITS-IDI \citep{2011AIPS114}, and to validate the contents against a
+schema.
 
 The allowed character set in FITS of 7-bit US-ASCII is overly restrictive in a
 Unicode world. In the late 1970s this was the correct choice but in the
