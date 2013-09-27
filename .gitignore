@@ -1,7 +1,13 @@
+# LaTeX files
 *.aux
 *.blg
 *.bbl
 *.ps
 *.log
 *.dvi
+
+# LaTeX-PDF sync
+*.synctex.gz
+
+# Final article itself
 P90.pdf
