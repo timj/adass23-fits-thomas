@@ -179,6 +179,9 @@ Ironically, for a format designed to handle astronomy data, FITS lacks shared
 models which describe scientific errors or data quality. Archiving is
 a primary use case for FITS however it lacks a sufficiently rich model 
 for capturing the history/provenance of the data.
+The HISTORY keyword provides just a textual representation of
+provenance which cannot be machine-read, and with a very loose 
+meaning outside particular applications.
 
 Finally, the current FITS WCS data models are complex yet incomplete and
 inflexible. There needs to be a way to stack mappings in an arbitrary
