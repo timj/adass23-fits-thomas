@@ -19,7 +19,7 @@
 Paul~Hirst$^4$, 
 David~S.~Berry$^5$, Erik~Bray$^2$,
 Norman~Gray$^6$, Demitri~Muna$^7$, James~Turner$^8$,
-Miguel~de~Val-Borro$^9$, Juande~Santander~Vela$^{10}$,
+Miguel~de~Val-Borro$^9$, Juande~Santander-Vela$^{10}$,
 David~Shupe$^{11}$, John~Good$^{11}$, and G.~Bruce~Berriman$^{11}$
 \affil{$^1$National Optical Astronomy Observatory, 950 N.\ Cherry Ave,
 Tucson, AZ 85719, USA}
@@ -49,7 +49,7 @@ Princeton, NJ 08544, USA}
   to exchange astronomical information easily. The FITS standard is,
   however, showing its age. Developed in the late 1970s the FITS
   authors made a number of implementation choices for the format that,
-  while common at time, are now seen to limit its utility with modern
+  while common at the time, are now seen to limit its utility with modern
   data. The authors of the FITS standard could not appreciate the
   challenges which we would be facing today in astronomical
   computing. Difficulties we now face include, but are not limited to,
@@ -179,6 +179,9 @@ Ironically, for a format designed to handle astronomy data, FITS lacks shared
 models which describe scientific errors or data quality. Archiving is
 a primary use case for FITS however it lacks a sufficiently rich model 
 for capturing the history/provenance of the data.
+The HISTORY keyword provides just a textual representation of
+provenance which cannot be machine-read, and with a very loose 
+meaning outside particular applications.
 
 Finally, the current FITS WCS data models are complex yet incomplete and
 inflexible. There needs to be a way to stack mappings in an arbitrary
@@ -189,14 +192,19 @@ e.g.][]{1998ASPC..145...41W,2012ASPC..461..825B,O35_adassxxii}.
 \subsection{Inflexibility in representing metadata and data}
 
 The 80 character card drives a number of subsequent limitations which
-result in poor metadata description (8 character keyword, max 68 character keyword values). 
+result in poor metadata description (8 character keyword, max 68 character keyword values, and ackward continuation constructs). 
 This out-dated restriction also results in the awkward implementation 
 of some conventions, such as ESO HIERARCH \citep{2009Wic}, that can not 
 overcome the underlying limitations of representation. Additionally, the lack of 
 namespaces and uncertainty over metadata meaning with other FITS files.
 Finally, the 2880 record is a minor but annoying restriction which results
 in wasteful blocks of whitespace in many FITS files and impedes the use
-of FITS to capture very small, but richly described data.
+of FITS to capture very small, but richly described
+data, and also impedes real-time writing of FITS files.
+% Juande Santander-Vela: The justification for the last statement 
+% is that blocks must be ready while writing data, and hence either
+% the FITS size balloons, or they cannot be properly written in
+% real time, but converted from other format at a later stage.
 
 \subsection{Inadequate support for large, distributed data}
 
