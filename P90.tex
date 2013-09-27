@@ -82,68 +82,66 @@ means to store and exchange astronomical data and, because of hard
 work of the FITS community, it has become a relatively easy exercise
 for application writers, archivists and end user scientists to
 interchange data and work productively on many computational astronomy
-problems. The success of FITS is such that it has even spread to other
-domains such as medical imaging and digitizing manuscripts in the
-Vatican library
-\citep[ascl:1206.013,][]{2006JRASC.100..242W,2012EWASSAlle}
+problems. 
+
+%The success of FITS is such that it has even spread to other
+%domains such as medical imaging and digitizing manuscripts in the
+%Vatican library
+%\citep[ascl:1206.013,][]{2006JRASC.100..242W,2012EWASSAlle}
 
 %% EWASS 2012 had multiple papers on FITS in a special session on
 %% digiral preservation. Chiappetti (from IAU) and Ammenti (from
 %% the Vatican). No write ups available though.
 
-Although there have been significant changes, the FITS standard has
-evolved very slowly since its genesis in the late 1970s. FITS has
+While there have been significant changes, the FITS standard has
+evolved very slowly since its creation in the late 1970s. FITS has
 added new types of metadata conventions such as World Coordinate
 System
 \citep[WCS;][]{2002A&A...395.1061G,2002A&A...395.1077C,2006A&A...446..747G}
-representation, and data serializations such as variable length binary
+representation and data serializations such as variable length binary
 tables \citep{1995A&AS..113..159C}. Nevertheless, these changes have
 not been sufficient to match the greater evolution in astronomical
 research over the same period of time.
 
 Astronomical research now goes beyond the paradigm of the original
 scientific team consuming only the observational data for which they
-proposed. The astronomy community has shifted towards utilizing
+proposed. Astronomy researchers have shifted towards utilizing the
 observations of others, accessing data from remote archives over the
 Internet, and combining these data with the original observations (or
 theoretical calculations) in order to obtain better and wider ranging
 scientific results. Many research projects now involve many diverse
-data sets from a range of sources. Instruments in astronomy now
+data sets from a range of sources and instruments in astronomy now
 produce many orders of magnitude larger datasets than were common at
-the time FITS was born, in some cases
-\citep[e.g.][]{2012ASPC..461..283A} requiring parallelized,
-distributed storage systems to provide adequate data rates.
+the time FITS was born.
 
-Astronomers have come to increasingly rely on others to write software
-to help process and analyze their data. Common libraries, analysis
-environments, pipeline processed data, applications and services
-provided by third parties form a crucial foundation for many
-astronomers' toolboxes. All of this requires that the interchange of
-data between different tools needs to be as seamless and automated as
-possible, and that complex data models and metadata used in processing
-are maintained and understood through the interchange.
+Additionally, astronomers have also come to increasingly rely on 
+others to write software to help process and analyze their data. Common 
+libraries, analysis environments, pipeline processed data, applications 
+and services provided by third parties form a crucial foundation for many
+astronomers' toolboxes. 
 
-These changes in research practices pose new challenges for the
-21\textsuperscript{st} century. We must address the need to handle an expanded
+This evolution in research practice poses many new challenges for the
+21\textsuperscript{st} century. 
+We must address the need to handle an expanded
 range of specialized data product types and models, be more conducive to the
 distributed exchange and storage of data, handle very large datasets and
 provide a means to capture significantly more complex metadata and data
 relationships.
 
-These limitations have caused members of the community to seek more capable
-storage formats, both in the past, e.g.\ the Starlink Hierarchical Data System
-\citep[HDS;][]{1982QJRAS..23..485D}, and in the present and future, e.g.\ the
-adoption of the Hierarchical Data Format version 5 (HDF5) by the Low-Frequency
-Array for radio astronomy project \citep[LOFAR;][]{2011ASPC..442...53A}, or in
-developing new formats of their own. Use of FITS will inevitably fall should it
-not adapt to these new challenges.
+Because FITS has shown difficulties in these areas some members of the community 
+have gravitated away from FITS seeking more capable solutions.
+Other storage formats serving in this role include the Starlink Hierarchical Data System
+\citep[HDS;][]{1982QJRAS..23..485D} and the adoption of the Hierarchical 
+Data Format version 5 (HDF5) by the Low-Frequency Array for radio astronomy 
+project \citep[LOFAR;][]{2011ASPC..442...53A}.
+We predict that the use of FITS will inevitably decline should it not adapt 
+to these new challenges.
 
-It is our intended goal in this paper to highlight some selected,
-important, problems which exist in the FITS core standard today. It is
-not our intention in this paper to prescribe specific remedies to
-these issues; rather, we hope to call attention of the FITS and
-greater astronomical computing community to these issues in the hopes
-that it will spur action to resolve them.
+In this paper we detail some selected important problems which exist 
+within the FITS standard today.  It is not our intention to prescribe 
+specific remedies to these issues; rather, we hope to call attention 
+of the FITS and greater astronomical computing communities to these 
+issues in the hopes that it will spur action to address them.
 
 \section{Problems -- Deficiencies of FITS for Modern Astronomical Computing}
 
@@ -164,44 +162,51 @@ of FITS files will help but there also needs to be a way to declare that
 a particular data model is being used from variants such as OIFITS
 \citep{2006SPIE.6268E.106T}, MBFITS \citep{2006A&A...454L..25M}, and
 FITS-IDI \citep{2011AIPS114}, and to validate the contents against a
-schema.
+namespaced schema.
 
 The allowed character set in FITS of 7-bit US-ASCII is overly restrictive in a
-Unicode world. In the late 1970s this was the correct choice but in the
-21\textsuperscript{st} century it seems strange that we cannot use an accent in
-someone's name or use a degree symbol in a comment.
+Unicode world. It is unacceptable that FITS authors cannot use special 
+scientific or mathematical symbols (ex. a degree symbol) or capture 
+non-English text in tables or FITS headers.
 
-\subsection{Missing critical data models}
+\subsection{Missing data models}
 
-FITS can support tables and multi-dimensional images but there is not
-standardised way of grouping these constructs in a related
-manner. Determining that a particular image extension contains the
-variance or mask for another image relies on string parsing and shared
-convention. Allowing related extensions to be grouped with a
-dictionary of shared meaning would go a long way to help with this
-issue.
+FITS can support basic data models such as tables and multi-dimensional 
+images but lacks many higher level data models which enable scientific
+data description. To start with, there is no standardized way of associating
+the basic models in a related manner. Determining that a particular image 
+extension contains the variance or mask for another image relies on string 
+parsing and shared convention. 
 
-The current FITS WCS data models are complex yet incomplete and
+Ironically, for a format designed to handle astronomy data, FITS lacks shared
+models which describe scientific errors or data quality. Archiving is
+a primary use case for FITS however it lacks a sufficiently rich model 
+for capturing the history/provenance of the data.
+
+Finally, the current FITS WCS data models are complex yet incomplete and
 inflexible. There needs to be a way to stack mappings in an arbitrary
 manner to allow for flexible model development \citep[see
 e.g.][]{1998ASPC..145...41W,2012ASPC..461..825B,O35_adassxxii}.
 
 
-\subsection{Inflexibility in organizing and representing metadata and
-  data}
+\subsection{Inflexibility in representing metadata and data}
 
-The 80 character fixed format header is extremely restrictive and
-encourages awkward extensions (e.g. ESO HIERARCH) that can not
-overcome the underlying constraints. Additionally, the lack of
-namespaces and uncertainty over inheritance of headers to other images
-leads to confusion.
+The 80 character card drives a number of subsequent limitations which
+result in poor metadata description (8 character keyword, max 68 character keyword values). 
+This out-dated restriction also results in awkward implementation 
+of some conventions (e.g. ESO HIERARCH) that can not overcome the 
+underlying limitations of representation. Additionally, the lack of 
+namespaces and uncertainty over metadata meaning with other FITS files.
+Finally, the 2880 record is a minor but annoying restriction which results
+in wasteful blocks of whitespace in many FITS files and impedes the use
+of FITS to capture very small, but richly described data.
 
 \subsection{Inadequate support for large, distributed data}
 
 Modern data sets can result in files of several terabytes that must be
 distributed across multiple file systems. The FITS grouping convention
-tries to provide this facility and should be made more robust and
-transparent. Additionally, streaming indeterminately sized data sets
+tries to provide this facility but is neither robust nor transparent
+enough. Additionally, streaming indeterminately sized data sets
 to files must be supported.
 
 
@@ -213,7 +218,7 @@ these issues should flow from constructive community discussion, and
 offered solutions to these problems. Possible solutions may involve
 moving existing FITS conventions into the core standard,
 modification of the FITS standard to remove limitations or possibly
-transferring the FITS data model over into a new serialisation, or
+transferring the FITS data model over into a new serialization, or
 some selection of these actions.
 
 These technical problems will be solved one way or another. If the
