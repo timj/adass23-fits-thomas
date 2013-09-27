@@ -199,7 +199,12 @@ overcome the underlying limitations of representation. Additionally, the lack of
 namespaces and uncertainty over metadata meaning with other FITS files.
 Finally, the 2880 record is a minor but annoying restriction which results
 in wasteful blocks of whitespace in many FITS files and impedes the use
-of FITS to capture very small, but richly described data.
+of FITS to capture very small, but richly described
+data, and also impedes real-time writing of FITS files.
+% Juande Santander-Vela: The justification for the last statement 
+% is that blocks must be ready while writing data, and hence either
+% the FITS size balloons, or they cannot be properly written in
+% real time, but converted from other format at a later stage.
 
 \subsection{Inadequate support for large, distributed data}
 
